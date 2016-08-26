@@ -1,5 +1,6 @@
 CVS/git/USvpn/serviceNow/outlook Logins: CaceyLi/anDb327
 
+
 cdb Logins: caceyli/bdna4249
 
 own host/bdna ftp/GZvpn: lihh/bdnacn
@@ -60,6 +61,10 @@ GZ VPN:
 
 mygithup: (caceyli/Simple.0)
 git clone git@github.com:caceyli/learngit.git
+
+BDNAgithub: （caceylibdna/andB327)
+git clone git@github.com:BDNA/Sequences-7.7.2.git
+git clone git@github.com:BDNA/Discover-7.7.2.giy
 
 ServiceNow discovery:
 1. Service-now Test Instance: http://bdnaintegration.service-now.com

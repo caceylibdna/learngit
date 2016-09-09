@@ -17,6 +17,8 @@ Customer environment, probably this situation:
 http://www.dba-oracle.com/security/removing_permissions.htm
 chmod o-x $ORACLE_HOME/bin/oracle
 
+http://blog.chinaunix.net/uid-25909722-id-3393985.html (service name, sid)
+
 CHINA RAC environment： (oracle db and grid installation are separately installed by oracle user and grid user.)
 *******************
 node1 

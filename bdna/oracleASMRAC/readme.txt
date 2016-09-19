@@ -24,11 +24,12 @@ CHINA RAC environment： (oracle db and grid installation are separately install
 node1 
 eth0   192.168.11.101  (host ip)
 eth0:1 192.168.11.103  (vip for node1)
+eth0:2 192.168.11.105  （vip2)
 
 node2 
 eth0   192.168.11.102  (host ip)
 eth0:1 192.168.11.104  (vip1 for node2)
-eth0:2 192.168.11.105  （vip2)
+
 
 dbname/service_name: ora12c
 sid: node1-ora12c1, node2-ora12c2

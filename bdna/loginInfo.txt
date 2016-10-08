@@ -69,7 +69,10 @@ git clone git@github.com:BDNA/Discover-7.7.2.git
 
 [bdna@VMDC8245 BDNA]$ git config --global user.name "Cacey Li"
 [bdna@VMDC8245 BDNA]$ git config --global user.email "caceyli@bdna.com"
+[bdna@VMDC8245 Sequences]$ git config remote.origin.url "git@github.com:BDNA/Sequences.git"
+(don't use --global if you just want to set the current git repository)
 [bdna@VMDC8245 BDNA]$ git config --list
+
 user.name=Cacey Li
 user.email=caceyli@bdna.com
 

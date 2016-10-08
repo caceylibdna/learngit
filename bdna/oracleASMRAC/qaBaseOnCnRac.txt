@@ -1,0 +1,48 @@
+QA Verification based on CN RAC(mutiple databases): 
+-------------------------------------- 
+Environment: 
+------------ 
+ip-range: 192.168.11.101~105
+host Level 2 credential: vzpbdna/bdna 
+oracle Level 3 credential: bdnadisc/bdna 
+Databases and instances: 
+1. ora12c -> ora12c1, ora12c2
+2. oradb  -> oradb1, oradb2
+3. orcl   -> orcl1, orcl2
+-------------------------------------- 
+
+Instruction: 
+------------ 
+Test case 1 (to reproduce the issue): 
+
+1. Install old Enterprise Sequence. (the Enterprise Sequence provided to customer for test last time.)
+2. install the LMS License key. 
+3. new a scan against the following ip-range(192.168.11.101~105) at level 2 & level 3 for Oracle Database. 
+(The related credentials are provided in the above 'Environment'.) 
+4. refresh the report. 
+5. review the report for Databases -> Oracle DB Instances on UI, as the screenshot showed: 
+   a. instanceNameNotCorrespondingToRightDBName.bmp
+
+Test case 2 (to validate the updated code) 
+1. Install 2016-09 Enterprise Sequence. (the code in qa branch on github).
+2. install the LMS License key. 
+3. new a scan against the following ip-range(192.168.11.101~105) at level 2 & level 3 for Oracle Database. 
+(The related credentials are provided in the above 'Environment'.) 
+4. refresh the report. 
+5. review the task summary and LMS report on UI, as these screenshots showed: 
+   a. 1_cnRacWith3dbsTasks.bmp 
+   b. 2_cnRACNodes.bmp
+   c. 3_cnRacWith3dbsLmsData.bmp
+   d. 4_cnRacWith3dbs_name.bmp
+   e. 5_cnRacLmsInstanceName.bmp
+   f. 6_cnRacLMSOptionsName.bmp
+   g. 7_cnRacLMSOptionQuery.bmp
+-------------------------------------- 
+
+Note: 
+----------
+screenshots For test case 1 are attached to the Attachement.
+screenshots For test case 2 are packaged into screenshots20160923_cnRACwith3DBs.zip, please download it from the attachment to review, thanks! 
+
+As the test Environment is in China GZ office, QA can try to access it through VPN connection. If QA can't access this environment, we need Erroll's help to add 2 more databases in his RAC invironment so that QA can finish the verification smoothly.
+--------------------------------------

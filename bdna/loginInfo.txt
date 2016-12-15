@@ -122,7 +122,7 @@ root/simple01
 
 vCenter Server 6.0
 192.168.8.232/9.113
-adminitrator@vsphere.local
+administrator@vsphere.local
 Simple.0
 
 JIRA:

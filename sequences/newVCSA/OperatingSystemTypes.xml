@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+**********************************************************************
+*
+* Copyright (c) 2007-2008 BDNA Corporation.
+* All Rights Reserved. BDNA products and services are protected
+* by the following U.S. patent: #6,988,134. BDNA is trademark of
+* BDNA Corporation.
+*
+* ******BDNA CONFIDENTIAL******
+*
+* The following code was developed and is owned by BDNA Corporation.
+* This code is confidential and may contain trade secrets.  The code
+* must not be distributed to any party outside of BDNA Corporation
+* without written permission from BDNA Corporation.  The code may be
+* covered by patents, patents pending, or patents applied for in the
+* US or elsewhere.
+*
+**********************************************************************
+-->
+<!DOCTYPE bdna SYSTEM "bdna.dtd">
+
+<!-- ............................................................... -->
+<!-- .......       Base Operating System Types           ........... -->
+<!-- ............................................................... -->
+<module
+    name="com.bdna.modules.os.OperatingSystemTypes"
+    displayLabel="Operating System Types"
+    requiredPlatformVersion="030300"
+    version="1"
+    lastCompatibleVersion="1">
+
+    <moduleDependency parentModuleName="com.bdna.modules.common.DiscoveryBase" parentModuleVersion="1" />
+    <moduleDependency parentModuleName="com.bdna.modules.hardware.genericHandset" parentModuleVersion="1" />
+    <moduleDependency parentModuleName="com.bdna.modules.os.Embedded" parentModuleVersion="1" />
+
+    <!-- 
+        This module contains operating system element and attribute 
+        definitions. No attribute sets are defined. These definitions
+        should be overwritten with versions including attribute sets
+        by level 2 modules.
+    -->
+
+    <!-- ............................................................... -->
+    <!-- .......            Windows declarations             ........... -->
+    <!-- ............................................................... -->
+
+    <element elementName="Windows"
+             elementTypePath="root.types.resource.software.operatingSystem"
+             displayLabel="Windows"
+             icon="ico_os_windows.xsl"
+             isTemplate="true" >
+
+        <attribute attributeName="systemData" dataType="text" displayLabel="System Information"/>
+        <attribute attributeName="licenseKey" dataType="string" displayLabel="License Key"/>
+        <attribute attributeName="hwIdentNum" dataType="string" displayLabel="BIOS Hardware Identification Number"/>
+        <attribute attributeName="hwUUID" dataType="string" displayLabel="Hardware UUID"/>
+        <attribute attributeName="SMBIOSAssetTag" dataType="string" displayLabel="System Enclosure Asset Tag"/>
+        <attribute attributeName="osBuildNumber" dataType="string" displayLabel="OS Build Number" />
+        <attribute attributeName="productType" dataType="string" displayLabel="Product Type" />
+        <attribute attributeName="installedSoftwareDetails" dataType="udt" displayLabel="Installed Windows Software Details"><![CDATA[InstallAppList]]></attribute>
+        <!--
+        <attribute attributeName="powerSettingsDetails" dataType="udt" displayLabel="Power Settings"><![CDATA[PowerSettingsUDT]]></attribute>
+        -->
+        <attribute attributeName="winProcesses" dataType="udt" displayLabel="Windows Processes"><![CDATA[WindowsProcessesUDT]]></attribute>
+        <attribute attributeName="winShare" dataType="udt" displayLabel="Windows Share Information"><![CDATA[WindowsShare]]></attribute>
+        <attribute attributeName="userInfo" dataType="udt" displayLabel="Windows User Information"><![CDATA[WindowsUserInfo]]></attribute>
+        <attribute attributeName="services" dataType="udt" displayLabel="Windows Services"><![CDATA[WindowsServicesUDT]]></attribute>
+        <attribute attributeName="numServices" dataType="number" displayLabel="Number of Windows Services" />
+        <attribute attributeName="monitors" dataType="udt" isList="true" displayLabel="Windows Desktop Monitors"><![CDATA[WindowsMonitorUDT]]></attribute>
+        <attribute attributeName="numMonitors" dataType="number" displayLabel="Number of Monitors" />
+        <attribute attributeName="winNics" dataType="udt" isList="true" displayLabel="NICs"><![CDATA[WinNics]]></attribute>
+        <attribute attributeName="imageName" dataType="string" displayLabel="Image Name"/>
+        <attribute attributeName="isDomainMember" dataType="string" displayLabel="Member of Registered Domain"/>
+        <attribute attributeName="serviceSUData" dataType="text" displayLabel="ServiceSU software usage data"/>
+        <!-- Derived attributes -->
+        <attribute attributeName="volumeSN" dataType="string" displayLabel="C Drive Volume Serial Number"/>
+        <attribute attributeName="windowsTypingData" dataType="string" displayLabel="Identification String for typing"/>
+        <!-- Last Logon User -->
+        <attribute attributeName="lastLogon" dataType="string" displayLabel="Last Logon User"/>
+        <!-- De-dupping support -->
+        <attribute attributeName="__WindowsOSDomainAndComputerName_deduppingValidatedBucket" dataType="string" displayLabel="Private attribute for doing Level-1/2 Windows domain/computer name de-dupping" />
+        <!-- Windows Cleanup Trace Status -->
+        <attribute attributeName="removeWindowsProfileStatus" dataType="number" displayLabel="Remove Windows Profile Status" />
+        <attribute attributeName="systemDSNDetails" dataType="text" displayLabel="System DSN Details" />
+        <attribute attributeName="odbcDriversDetails" dataType="udt" isList="true" displayLabel="ODBC Drivers"><![CDATA[ODBCDriverUDT]]></attribute>
+        <attribute attributeName="ntpW32tmCmd" dataType="string" displayLabel="NTP w32tm command"/>
+
+        <attrSysDefValue attributeName="manufacturer">Microsoft Corporation</attrSysDefValue>
+    </element>
+    <element elementName="Windows3_1"
+             elementTypePath="root.types.resource.software.operatingSystem.Windows"
+             displayLabel="Windows 3.1"
+             isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Microsoft Corporation</attrSysDefValue>
+    </element>
+    <element elementName="Windows95"
+             elementTypePath="root.types.resource.software.operatingSystem.Windows"
+             displayLabel="Windows 95"
+             isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Microsoft Corporation</attrSysDefValue>
+    </element>
+    <element elementName="Windows98"
+             elementTypePath="root.types.resource.software.operatingSystem.Windows"
+             displayLabel="Windows 98"
+             isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Microsoft Corporation</attrSysDefValue>
+    </element>
+    <element elementName="WindowsNT"
+             elementTypePath="root.types.resource.software.operatingSystem.Windows"
+             displayLabel="Windows NT"
+             isTemplate="true">
+       <attrSysDefValue attributeName="manufacturer">Microsoft Corporation</attrSysDefValue>
+    </element>
+    <element elementName="WindowsME"
+             elementTypePath="root.types.resource.software.operatingSystem.Windows"
+             displayLabel="Windows ME"
+             isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Microsoft Corporation</attrSysDefValue>
+    </element>
+    <element elementName="Windows2000"
+             elementTypePath="root.types.resource.software.operatingSystem.Windows"
+             displayLabel="Windows 2000"
+             isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Microsoft Corporation</attrSysDefValue>
+    </element>
+    <element elementName="WindowsXP"
+             elementTypePath="root.types.resource.software.operatingSystem.Windows"
+             displayLabel="Windows XP"
+             isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Microsoft Corporation</attrSysDefValue>
+    </element>
+    <element elementName="Windows2003"
+             elementTypePath="root.types.resource.software.operatingSystem.Windows"
+             displayLabel="Windows Server 2003"
+             isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Microsoft Corporation</attrSysDefValue>
+    </element>
+    <element elementName="WindowsVista"
+             elementTypePath="root.types.resource.software.operatingSystem.Windows"
+             displayLabel="Windows Vista"
+             isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Microsoft Corporation</attrSysDefValue>
+    </element>
+
+    <element elementName="Windows2008"
+             elementTypePath="root.types.resource.software.operatingSystem.Windows"
+             displayLabel="Windows Server 2008"
+             isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Microsoft Corporation</attrSysDefValue>
+    </element>
+
+    <element elementName="Windows7"
+             elementTypePath="root.types.resource.software.operatingSystem.Windows"
+             displayLabel="Windows 7"
+             isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Microsoft Corporation</attrSysDefValue>
+    </element>
+
+    <element displayLabel="Microsoft Hyper-V Server" elementName="HyperVServer" elementTypePath="root.types.resource.software.operatingSystem.hypervisor" isTemplate="true">
+        <attribute attributeName="hpv_licenseKey" dataType="string" displayLabel="License Key"/>
+        <attribute attributeName="hpv_appProductID" dataType="string" displayLabel="Product ID"/>
+        <attribute attributeName="hpv_appLicenseType" dataType="string" displayLabel="License Type"/>
+        <attribute attributeName="hpv_hwIdentNum" dataType="string" displayLabel="BIOS Hardware Identification Number"/>
+        <attribute attributeName="hpv_hwUUID" dataType="string" displayLabel="Hardware UUID"/>  
+        <attribute attributeName="hpv_SMBIOSAssetTag" dataType="string" displayLabel="System Enclosure Asset Tag"/>
+        <attribute attributeName="hpv_osBuildNumber" dataType="string" displayLabel="OS Build Number"/>
+        <attribute attributeName="hpv_osLanguage" dataType="string" displayLabel="OS Language"/>
+        <attribute attributeName="hpv_serviceRelease" dataType="string" displayLabel="OS Service Release Version"/>
+        <attribute attributeName="hpv_productType" dataType="string" displayLabel="Product Type"/>
+        <attribute attributeName="hpv_patches" dataType="text" displayLabel="patches"/>
+        <attribute attributeName="hpv_winProcesses" dataType="udt" displayLabel="Hyper-V Server Processes"><![CDATA[HyperVProcessesUDT]]></attribute>
+        <attribute attributeName="hpv_userInfo" dataType="udt" displayLabel="Hyper-V Server User Information"><![CDATA[HyperVUserInfo]]></attribute>
+        <attribute attributeName="hpv_services" dataType="udt" displayLabel="Hyper-V Server Services"><![CDATA[HyperVServicesUDT]]></attribute>
+        <attribute attributeName="hpv_numServices" dataType="number" displayLabel="Number of Windows Services"/>
+        <attribute attributeName="hpv_monitors" dataType="udt" displayLabel="Hyper-V Server Desktop Monitors" isList="true"><![CDATA[HyperVMonitorUDT]]></attribute>
+        <attribute attributeName="hpv_numMonitors" dataType="number" displayLabel="Number of Monitors"/>
+        <attribute attributeName="hpv_winNics" dataType="udt" displayLabel="NICs" isList="true"><![CDATA[HyperVNics]]></attribute>
+        <attribute attributeName="hpv_CPUs" dataType="udt" displayLabel="CPUs" isList="true"><![CDATA[HyperVCPUs]]></attribute>
+        <attribute attributeName="hpv_isDomainMember" dataType="string" displayLabel="Member of Registered Domain"/>
+        <attribute attributeName="hpv_patchesInstalled" dataType="string" displayLabel="patches Installed"/>
+        <!-- Derived attributes -->
+        <attribute attributeName="hpv_volumeSN" dataType="string" displayLabel="C Drive Volume Serial Number"/> 
+        <attribute attributeName="hpv_lastLogon" dataType="string" displayLabel="Hyper-V Last Logon User"/>
+
+        <attribute attributeName="systemData" dataType="text" displayLabel="Private attribute  -  system data"/>
+        <attrSysDefValue attributeName="manufacturer">Microsoft Corporation</attrSysDefValue>
+        <attrSysDefValue attributeName="osWkgrpDomain">__BDNA_DEFAULT__</attrSysDefValue>
+    </element>
+
+    <element 
+        elementName="ArubaWirelessAPFootprint"
+        elementTypePath="root.types.footprint"
+        displayLabel="Aruba Wireless AP"
+        isTemplate="true">
+        <attribute attributeName="IP" dataType="string" displayLabel="IP Address" />
+        <attribute attributeName="macAddress" dataType="string" displayLabel="Mac Address" />
+        <attribute attributeName="DoS" dataType="string" displayLabel="Dynamic/Static" />
+        <attribute attributeName="status" dataType="string" displayLabel="Running Status" />
+        <attribute attributeName="controller" dataType="string" displayLabel="Controller" />
+    </element>
+
+    <element
+        elementName="ILOMFootprint"
+        elementTypePath="root.types.footprint"
+        displayLabel="ILOM footprint"
+        isTemplate="true" >
+
+        <attribute attributeName="ilomData" dataType="text" displayLabel="ILOM Data" />
+        <attribute attributeName="serialNumber" dataType="string" displayLabel="Serial number" />
+        <attribute attributeName="hostName" dataType="string" displayLabel="Host Name" />
+        <attribute attributeName="displayMacAddresses" dataType="string" displayLabel="mac Addresses" />
+        <attribute attributeName="macAddresses" dataType="string" displayLabel="mac Addresses" />
+        <attribute attributeName="ilomModel" dataType="string" displayLabel="Model" />
+        <attribute attributeName="ilomVersion" dataType="string" displayLabel="ILOM Version" />
+        <attribute attributeName="ilomPartNumber" dataType="string" displayLabel="Part Number" />
+        <attribute attributeName="ilomAddress" dataType="string" displayLabel="ILOM IP Address" />
+        <attribute attributeName="ilomMacAddress" dataType="string" displayLabel="ILOM Mac Address" />
+        <attribute attributeName="ilomHostPrimaryMacAddress" dataType="string" displayLabel="Host Primary Mac Address" />
+        <attribute attributeName="ilomOutput" dataType="udt" displayLabel="ILOMOutput"><![CDATA[ILOMOutput]]></attribute>
+    </element>
+
+    <element
+        elementName="ELOMFootprint"
+        elementTypePath="root.types.footprint"
+        displayLabel="ELOM footprint"
+        isTemplate="true" >
+
+        <attribute attributeName="elomData" dataType="text" displayLabel="ELOM Data" />
+        <attribute attributeName="serialNumber" dataType="string" displayLabel="Serial number" />
+        <attribute attributeName="hostName" dataType="string" displayLabel="Host Name" />
+        <attribute attributeName="macAddresses" dataType="string" displayLabel="mac Addresses" />
+        <attribute attributeName="elomModel" dataType="string" displayLabel="Model" />
+        <attribute attributeName="elomVersion" dataType="string" displayLabel="ELOM Version" />
+        <attribute attributeName="elomPartNumber" dataType="string" displayLabel="Part Number" />
+        <attribute attributeName="elomAddress" dataType="string" displayLabel="ELOM IP Address" />
+        <attribute attributeName="elomMacAddress" dataType="string" displayLabel="ELOM Mac Address" />
+        <attribute attributeName="elomGateway" dataType="string" displayLabel="ELOM GateWay" />
+        <attribute attributeName="elomNetmask" dataType="string" displayLabel="ELOM NetMask" />
+        <attribute attributeName="elomDhcpConfigured" dataType="string" displayLabel="ELOM DhcpConfigured" />
+    </element>
+
+  <element displayLabel="Oracle Advanced Lights Out Manager (ALOM)"
+    elementName="ALOM"
+    elementTypePath="root.types.resource.software.operatingSystem.embedded"
+    isTemplate="true">
+    <attribute attributeName="alomData" dataType="text" displayLabel="ALOM Data" />
+    <attribute attributeName="sys_macAddresses" dataType="string" displayLabel="mac Addresses" />
+    <attribute attributeName="alomModel" dataType="string" displayLabel="Model" />
+    <attribute attributeName="alomAddress" dataType="string" displayLabel="ALOM IP Address" />
+    <attribute attributeName="alomMacAddress" dataType="string" displayLabel="ALOM Mac Address" />
+    <attribute attributeName="alomGateway" dataType="string" displayLabel="ALOM Gateway address" />
+    <attribute attributeName="alomNetmask" dataType="string" displayLabel="ALOM Netmask" />
+    <attribute attributeName="sys_hostName" dataType="string" displayLabel="Hostname managed by ALOM " />
+    </element>
+
+    <element
+        elementName="HyperVGuest"
+        elementTypePath="root.types.resource.system.virtualizedResource.guest"
+        displayLabel="Hyper-V Guest OS"
+        isTemplate="true">
+
+       <attribute attributeName="isFloppyPresent" dataType="string" displayLabel="Is Floppy Drive Present" />
+       <attribute attributeName="isUSBPresent" dataType="string" displayLabel="Is USB Present" />
+        <attribute attributeName="isSoundPresent" dataType="string" displayLabel="Is Sound Present" />   -->
+
+       <attribute attributeName="VMDisplayName" dataType="string" displayLabel="Virtual Machine Display Label" />
+       <attribute attributeName="VMGUID" dataType="string" displayLabel="Virtual Machine GUID" />
+       <attribute attributeName="guestOSType" dataType="string" displayLabel="Guest OS Type Configured" />
+       <attribute attributeName="guestOSVersion" dataType="string" displayLabel="Guest OS Version" />
+       <attribute attributeName="guestOSPlatformID" dataType="string" displayLabel="Guest OS Platform ID" />
+       <attribute attributeName="NetworkAddressIPv4" dataType="string" displayLabel="Network Address IPv4" />
+       <attribute attributeName="NetworkAddressIPv6" dataType="string" displayLabel="Network Address IPv6" />
+       <attribute attributeName="guestOSFamily" dataType="string" displayLabel="Guest OS Family Configured" />
+       <attribute attributeName="configFilePath" dataType="string" displayLabel="Configuration File Path" />
+       <attribute attributeName="guestMacAddresses" dataType="text" isList="true" displayLabel="Guest/VM MAC Addresses" />
+       <attribute attributeName="guestMacAddressesStr" dataType="string" displayLabel="Guest/VM MAC Addresses String" />
+       <attribute attributeName="copiedVirtualizedIdentifier" dataType="string" displayLabel="Private attribute - Copied Virtualized System Identifier"/>
+       <attribute attributeName="VMguestIdentification" dataType="string" displayLabel="VM Guest Identification" />
+       <attribute attributeName="stoppedAtHostShutdown" dataType="string" displayLabel="Stopped At Host Shutdown"  />
+       <attribute attributeName="procCount" dataType="string" displayLabel="Processer Number"  />
+       <attribute attributeName="procWeight" dataType="string" displayLabel="Processer Relative Weight"  />
+       <attribute attributeName="procReservation" dataType="string" displayLabel="Virtual Machine Reverse(percentage)"  />
+       <attribute attributeName="dynamicMemoryEnabled" dataType="string" displayLabel="Dynamic Memory Enabled or not"  />
+       <attribute attributeName="memoryLimit" dataType="string" displayLabel="Memory Limit"  />
+       <attribute attributeName="memoryBuffer" dataType="string" displayLabel="Memory Buffer"  />
+       <attribute attributeName="last_powered_off_time" dataType="string" displayLabel="Last Powered Off Time"  />
+       <attribute attributeName="last_powered_on_time" dataType="string" displayLabel="Last Powered On Time"  />
+       <attribute attributeName="last_state_change_time" dataType="string" displayLabel="Last State Change Time"  />
+       <attribute attributeName="base_board_serial_number" dataType="string" displayLabel="Base Board Serial Number"  />
+       <attribute attributeName="bios_guid" dataType="string" displayLabel="Bios Guid"  />
+       <attribute attributeName="bios_serial_number" dataType="string" displayLabel="Bios Serial Number"  />
+       <attribute attributeName="VMHostDummyLabel" dataType="string" displayLabel="Private attribute - VM Host Constant Dummy Label" />
+       <attribute attributeName="VMGuestDummyLabel" dataType="string" displayLabel="Private attribute - VM Guest Constant Dummy Label" />
+       <attribute attributeName="VMHostCompName" dataType="string" displayLabel="Host OS Computer Name" />
+       <attribute attributeName="guestCompName" dataType="string" displayLabel="OS Computer Name of VM Guest" />
+       <attribute attributeName="isInCfgFile" dataType="string" displayLabel="Is Guest Found in Configuration File?" />
+       <attribute attributeName="virtSoftware" dataType="string" displayLabel="Hyper-V Virtualization Software" />
+       <attribute attributeName="isHostOS" dataType="string" displayLabel="Is Guest OS Also a Host OS?" />
+       <attribute attributeName="isGuestOS" dataType="string" displayLabel="Is Guest OS?" />
+       <attribute attributeName="isScanned" dataType="string" displayLabel="Is Scanned" />
+       <attribute attributeName="vmStatus" dataType="string" displayLabel="Virtual Machine Status" />
+       <attribute attributeName="IntegrationServicesVersion" dataType="string" displayLabel="Virtual Machine Integration Services Version" />
+    </element>
+
+    <element
+        elementName="HyperVDeviceOS"
+        elementTypePath="root.types.resource.system.virtualizedResource.virtualOS.deviceOS"
+        displayLabel="Device OS running Microsoft Hyper-V Server"
+        isTemplate="true">
+
+        <attribute attributeName="totalRunningVM" dataType="string" displayLabel="Total Number of Virtual Machine running" />
+        <attribute attributeName="virtSoftware" dataType="string" displayLabel="Microsoft Hyper-V Virtualization Software" />
+        <attribute attributeName="isUnknownDeviceOS" dataType="string" displayLabel="Is this an unknown Device OS?" />
+        <attribute attributeName="HostIdentification" dataType="string" displayLabel="Is this Host Identificated by Virtual Machine?" />
+        <attribute attributeName="VMHostDummyLabel" dataType="string" displayLabel="Private attribute - VM Host Constant Dummy Label" />
+    </element>
+
+    <!-- ............................................................... -->
+    <!-- .......              UNIX declarations              ........... -->
+    <!-- ............................................................... -->
+
+    <!-- UNIX -->
+    <element
+        elementName="UNIX"
+        elementTypePath="root.types.resource.software.operatingSystem"
+        icon="ico_os_unix.xsl"
+        displayLabel="UNIX"
+        isTemplate="true" >
+
+        <attribute attributeName="unameString" dataType="string" displayLabel="UNIX operating system name" />
+        <attribute attributeName="TimeTempFilesPurged" dataType="string" displayLabel="Date of Last Temporary File Purge" />
+        <attribute attributeName="__DiscoveryUserHomeDirectory" dataType="string" displayLabel="Private attribute - discovery user's home directory" />
+        <attribute attributeName="__DiscoveryUserFileSystem" dataType="string" displayLabel="Private attribute - discovery user's home directory's filesystem" />
+        <attribute attributeName="__DiscoveryUserIsLocal" dataType="string" displayLabel="Private attribute - is discovery user a local user or not" />
+        <attribute attributeName="applicationFileFootprintTags" dataType="string" displayLabel="Application Signature File Footprints" />
+        <attrSysDefValue attributeName="applicationFileFootprintTags"><![CDATA[,]]></attrSysDefValue>
+        <attribute attributeName="applicationProcessFootprintTags" dataType="string" displayLabel="Application Signature Process Footprints" />
+        <attrSysDefValue attributeName="applicationProcessFootprintTags"><![CDATA[,]]></attrSysDefValue>
+        <attribute attributeName="applicationFootprintTags" dataType="string" displayLabel="Application Footprints" />
+        <attribute attributeName="findCommandSuccessful" dataType="string" displayLabel="Is UNIX find command execution successful" />
+        <attribute attributeName="installedSoftwareDetails" dataType="udt" displayLabel="Installed UNIX Software Details"><![CDATA[InstallPkgList]]></attribute>
+        <attribute attributeName="__GenerationalSSHKeyInEffect" dataType="text" displayLabel="Private attribute to keep track of updating OpenSSH keys" />
+        <attribute attributeName="KnownSSHPublicKeys" dataType="string" displayLabel="Known OpenSSH Public Keys"/>
+        <attribute attributeName="UnknownSSHPublicKeys" dataType="string" displayLabel="Unknown OpenSSH Public Keys"/>
+        <attribute attributeName="UNIXFindCmdPidsNotCleaned" dataType="string" displayLabel="Pids related to UNIX find command that could not be cleaned up" />
+        <attribute attributeName="__filedirTokens" isList="true" dataType="udt" displayLabel="Private attribute - File tokens and count from UNIX find" ><![CDATA[FileDirTokens]]></attribute>
+        <attribute attributeName="RAIDBusController" dataType="string" displayLabel="RAID Bus Controller(s)"/>
+        <attribute attributeName="VGAController" dataType="string" displayLabel="VGA Controller(s)"/>
+        <attribute attributeName="EthernetController" isList="true" dataType="text" displayLabel="Ethernet Controller(s)"/>
+        <attribute attributeName="UNIXProcessList" dataType="udt" displayLabel="UNIX Processes List"><![CDATA[UNIXProcessList]]></attribute>
+        <attribute attributeName="UNIXNics" dataType="udt" displayLabel="NICs"><![CDATA[UNIXNics]]></attribute>
+        <attribute attributeName="VolGrpInfo" dataType="udt" displayLabel="Volume Groups"><![CDATA[VolumeGroups]]></attribute>
+        <attribute attributeName="PVInfo" dataType="udt" displayLabel="Physical Volumes"><![CDATA[PhysicalVolumes]]></attribute>
+        <attribute attributeName="LVInfo" dataType="udt" displayLabel="Logical Volumes"><![CDATA[LogicalVolumes]]></attribute>
+    </element>
+
+    <!-- generic AIX -->
+    <element
+        elementName="AIX"
+        elementTypePath="root.types.resource.software.operatingSystem.UNIX"
+        displayLabel="AIX"
+        icon="ico_os_aix.xsl"
+        isTemplate="true" >
+
+        <attribute attributeName="isLPAR" dataType="string" displayLabel="Is Logical Partition"/>
+        <attribute attributeName="LPARNumber" dataType="number" displayLabel="Logical Partition Number"/>
+        <attribute attributeName="LPARName" dataType="string" displayLabel="Logical Partition Name"/>
+        <attribute attributeName="systemIDNumber" dataType="string" displayLabel="System ID Number"/>
+        <attribute attributeName="systemIdentificationString" dataType="string" displayLabel="System Identification String"/>
+        <attribute attributeName="uniquePartitionIdenString" dataType="string" displayLabel="LPAR unique Identification String"/>
+        <attribute attributeName="LPARNodeName" dataType="string" displayLabel="LPAR Node Name" />
+        <attribute attributeName="LPARType" dataType="string" displayLabel="LPAR Type" />
+        <attribute attributeName="LPARTypeCategory" dataType="string" displayLabel="LPAR Type Category" />
+        <attribute attributeName="SMT" dataType="string" displayLabel="SMT" />
+        <attribute attributeName="LPARProcessorMode" dataType="string" displayLabel="LPAR Processor Mode" />
+        <attribute attributeName="LPAREntitledCapacity" dataType="string" displayLabel="LPAR Entitled Processing Capacity" />
+        <attribute attributeName="LPARSharedPoolID" dataType="string" displayLabel="LPAR Shared Pool Identifier" />
+        <attribute attributeName="LPARMaxMemoryMB" dataType="number" displayLabel="LPAR Maximum Memory" />
+        <attribute attributeName="LPARMinMemoryMB" dataType="number" displayLabel="LPAR Minimum Memory" />
+        <attribute attributeName="LPARMaxPhysicalCPUs" dataType="number" displayLabel="LPAR system Maximum number of physical CPUs" />
+        <attribute attributeName="LPARActivePhysicalCPUs" dataType="number" displayLabel="Number of Active Physical CPUs in LPAR system" />
+        <attribute attributeName="LPARLogicalCPUs" dataType="number" displayLabel="LPAR Logical CPUs" />
+        <attribute attributeName="LPARVirtualCPUs" dataType="number" displayLabel="LPAR Virtual CPUs" />
+        <attribute attributeName="LPARMaxCapacity" dataType="string" displayLabel="LPAR Maximum Capacity" />
+
+        <attribute attributeName="LPARActiveCPUs" dataType="number" displayLabel="Number of Active CPUs in LPAR Shared Pool" />
+        <attribute attributeName="LPARMaxPoolCapacity" dataType="number" displayLabel="Maximum Capacity of LPAR Shared Pool" />
+        <attribute attributeName="LPAREntitledPoolCapacity" dataType="number" displayLabel="Entitled Capacity of LPAR Shared Pool" />
+
+        <attrSysDefValue attributeName="manufacturer">IBM Corp</attrSysDefValue>
+    </element>
+
+    <!-- generic HPUX -->
+    <element
+        elementName="HPUX"
+        elementTypePath="root.types.resource.software.operatingSystem.UNIX"
+        icon="ico_os_hp-ux.xsl"
+        displayLabel="HP-UX"
+        isTemplate="true" >
+        <!-- @todo FIX: try uname on HP and add the attributes -->
+
+        <attribute attributeName="isnPar" dataType="string" displayLabel="Is Node Partition" />
+        <attribute attributeName="isvPar" dataType="string" displayLabel="Is Virtual Partition" />
+        <attribute attributeName="isvParInnPar" dataType="string" displayLabel="Is Virtual Partition in a Node Partition" />
+        <attribute attributeName="nParNum" dataType="number" displayLabel="Node Partition Number"/>
+        <attribute attributeName="vParNum" dataType="number" displayLabel="Virtual Partition Number"/>
+        <attribute attributeName="nParName" dataType="string" displayLabel="Node Partition Name" />
+        <attribute attributeName="vParName" dataType="string" displayLabel="Virtual Partition Name" />
+        <attribute attributeName="partitionIdent" dataType="string" displayLabel="Partition Identifier" />
+        <attribute attributeName="nParStat" dataType="string" displayLabel="Node Partition Status" />
+        <attribute attributeName="numCells" dataType="number" displayLabel="Number of Cells in nPar" />
+        <attribute attributeName="numIOChassis" dataType="number" displayLabel="Number of IO Chassis in nPar" />
+        <attribute attributeName="coreCell" dataType="string" displayLabel="nPar Core Cell" />
+
+        <attrSysDefValue attributeName="manufacturer">Hewlett-Packard Co</attrSysDefValue>
+    </element>
+
+    <!-- generic IRIX -->
+    <element
+        elementName="IRIX"
+        elementTypePath="root.types.resource.software.operatingSystem.UNIX"
+        displayLabel="IRIX"
+        icon="ico_os_irix.xsl"
+        isTemplate="true" >
+        <attrSysDefValue attributeName="manufacturer">Silicon Graphics Inc</attrSysDefValue>
+    </element>
+
+    <!-- generic Linux -->
+    <element
+        elementName="Linux"
+        elementTypePath="root.types.resource.software.operatingSystem.UNIX"
+        icon="ico_os_linux.xsl"
+        displayLabel="Linux"
+        isTemplate="true" >
+        <attribute attributeName="__distributionReleaseString" dataType="string" displayLabel="Private attribute - Linux version release patchlevel string" />
+    </element>
+
+    <!-- generic Solaris -->
+    <element
+        elementName="Solaris"
+        elementTypePath="root.types.resource.software.operatingSystem.UNIX"
+        displayLabel="Solaris"
+        icon="ico_os_solaris.xsl"
+        isTemplate="true" >
+
+        <attribute attributeName="isZonesConfigured" dataType="string" displayLabel="Is Solaris Zones Configured"/>
+        <attribute attributeName="isGlobalZone" dataType="string" displayLabel="Is Solaris Global Zone"/>
+        <attribute attributeName="isNonGlobalZone" dataType="string" displayLabel="Is Solaris Non Global Zone"/>
+        <attribute attributeName="nonGlobalZonesInfo" dataType="text" isList="true" displayLabel="Non-Global Zones information obtained from Global Zone"/>
+        <attribute attributeName="zoneID" dataType="string" displayLabel="Solaris Zone ID"/>
+        <attribute attributeName="zoneName" dataType="string" displayLabel="Solaris Zone Name"/>
+        <attribute attributeName="zoneState" dataType="string" displayLabel="Solaris Zone State"/>
+        <attribute attributeName="zonePath" dataType="string" displayLabel="Solaris Zone Path"/>
+        <attribute attributeName="zoneUUID" dataType="string" displayLabel="Solaris Zone UUID"/>
+        <attribute attributeName="isControlDomain" dataType="string" displayLabel="Is Sun Control Domain"/>
+        <attribute attributeName="isLogicalDomain" dataType="string" displayLabel="Is Sun Logical Domain"/>
+        <attribute attributeName="logicalDomainResources" dataType="text" isList="true" displayLabel="Logical Domain Resources"/>
+        <attribute attributeName="parsedLDomData" dataType="text" isList="true" displayLabel="Parsed LDom Data"/>
+        <attribute attributeName="isZoneRunningInLogicalDomain" dataType="string" displayLabel="Is Solaris Zone Running in Logical Domain" />
+        <attribute attributeName="isZoneRunningInGuestDomain" dataType="string" displayLabel="Is Solaris Zone Running In Guest Domain" />
+        <attribute attributeName="isZoneRunningInControlDomain" dataType="string" displayLabel="Is Solaris Zone Running In Control Domain" />
+
+        <attrSysDefValue attributeName="manufacturer">Sun Microsystems Inc</attrSysDefValue>
+    </element>
+
+    <element elementName="Tru64"
+             elementTypePath="root.types.resource.software.operatingSystem.UNIX"
+             displayLabel="Tru64"
+             icon="ico_os_tru64.xsl"
+             isTemplate="true" >
+        <attrSysDefValue attributeName="manufacturer">Hewlett-Packard Co</attrSysDefValue>
+    </element>
+
+    <!-- ............................................................... -->
+    <!-- .......             Mac OS declarations             ........... -->
+    <!-- ............................................................... -->
+
+    <!-- generic Mac OS -->
+    <element
+        elementName="MacOS"
+        elementTypePath="root.types.resource.software.operatingSystem"
+        icon="ico_os_unix.xsl"
+        displayLabel="Mac OS"
+        isTemplate="true">
+
+        <attribute attributeName="bootRomVersion" dataType="string" displayLabel="Boot ROM Version" />
+        <!-- Last Logon User -->
+        <attribute attributeName="maclastLogon" dataType="string" displayLabel="Last Logon User"/>
+        <attribute attributeName="localHostName" dataType="string" displayLabel="Local Host Name" />
+        <attribute attributeName="macFileSystems" dataType="udt" isList="true" displayLabel="File Systems"><![CDATA[MacFileSystems]]></attribute>
+        <attribute attributeName="macNics" dataType="udt" isList="true" displayLabel="NICs"><![CDATA[MacNics]]></attribute>
+        <attribute attributeName="printers" dataType="text" isList="true" displayLabel="Printers" />
+        <attribute attributeName="installedSoftwareDetails" dataType="udt" isList="true" displayLabel="Installed Applications Listed by System Profiler"><![CDATA[InstallMacAppList]]></attribute>
+        <attribute attributeName="processList" dataType="udt" isList="true" displayLabel="Process List"><![CDATA[MacProcessList]]></attribute>
+
+    </element>
+
+    <!-- ............................................................... -->
+    <!-- .......           VMware ESX declarations           ........... -->
+    <!-- ............................................................... -->
+
+    <element
+        elementName="VMwareESXServer"
+        elementTypePath="root.types.resource.software.operatingSystem.hypervisor"
+        displayLabel="VMware ESX"
+        isTemplate="true" >
+
+        <attribute attributeName="uuid" dataType="string" displayLabel="UUID"/>
+        <attribute attributeName="__distributionReleaseString" dataType="string" displayLabel="Private attribute - ESX version release patchlevel string" />
+
+        <attribute attributeName="filesystemSpaceTotal" dataType="number" displayLabel="Total Filesystem Space"/>
+        <attribute attributeName="filesystemSpaceUsed" dataType="number" displayLabel="Total Used Filesystem Space"/>
+        <attribute attributeName="filesystemSpaceAvailable" dataType="number" displayLabel="Total Available Filesystem Space"/>
+
+        <!-- commented biosReleaseDate section due to OS_WRD invalid identifier during "Refresh Report" -->
+        <!-- <attribute attributeName="biosReleaseDate" dataType="string" displayLabel="BIOS Release Date"/> -->
+        <attribute attributeName="isVMwareVirtualCenterAgentRunning" dataType="string" displayLabel="Is VMware VirtualCenter Agent Running?"/>
+        
+        <attribute attributeName="licenseInfo" dataType="udt" isList="true"
+                   displayLabel="License Information"><![CDATA[licenseInfo]]></attribute>
+
+        <attribute attributeName="ESX_fileSystems" dataType="text" displayLabel="ESX fileSystems"/>
+        <attribute attributeName="datastore" dataType="udt" isList="true"
+                    displayLabel="Datastore"><![CDATA[ESXDatastore]]></attribute>
+
+        <attribute attributeName="bootTime" dataType="string" displayLabel="Boot Time"/>
+
+        <!--
+        This approach (collecting the data into a giant CLOB, and then
+        exploding the CLOB into a bunch of attribute values by rule
+        is very much contrary to what I would prefer to do, but see
+        bug 16318, wherein we cannot collect the attributes directly
+        using UNIX-style credentials but have those attributes have
+        lower weight than the Web Services collected attributes values,
+        because the CLE-collected attributes always become visible
+        even if they have lower weight!
+        -->
+        <attribute attributeName="esxSystemData" dataType="text" displayLabel="Private attribute - ESX system data" />
+
+        <attrSysDefValue attributeName="manufacturer">VMware, Inc.</attrSysDefValue>
+
+    </element>
+
+    <!-- ............................................................... -->
+    <!-- .......        Oracle VM Server declarations        ........... -->
+    <!-- ............................................................... -->
+
+    <element
+        elementName="OracleVMServer"
+        elementTypePath="root.types.resource.software.operatingSystem.hypervisor"
+        displayLabel="Oracle VM Server"
+        isTemplate="true" >
+        <attribute attributeName="__distributionReleaseString" dataType="string" displayLabel="Private attribute - OVM version release patchlevel string" />    
+        <attribute attributeName="ovmProcessList" dataType="udt" isList="true" displayLabel="Process List"><![CDATA[OVMServerProcessList]]></attribute>
+    </element>
+
+    <!-- ............................................................... -->
+    <!-- .......           XenServer declarations            ........... -->
+    <!-- ............................................................... -->
+
+    <element
+        elementName="XenServer"
+        elementTypePath="root.types.resource.software.operatingSystem.hypervisor"
+        displayLabel="XenServer"
+        isTemplate="true" >
+
+        <attribute attributeName="__distributionReleaseString" dataType="string" displayLabel="Private attribute - ESX version release patchlevel string" />
+
+        <attribute attributeName="filesystemSpaceTotal" dataType="number" displayLabel="Total Filesystem Space"/>
+        <attribute attributeName="filesystemSpaceUsed" dataType="number" displayLabel="Total Used Filesystem Space"/>
+        <attribute attributeName="filesystemSpaceAvailable" dataType="number" displayLabel="Total Available Filesystem Space"/>
+
+       <attribute attributeName="buildNumber" dataType="string" displayLabel="Build Number" />
+
+       <attribute attributeName="XenVMsData" dataType="text" displayLabel="XenVMsData - Internal" />
+
+    </element>
+
+
+    <!-- ............................................................... -->
+    <!-- .......            Netware declarations             ........... -->
+    <!-- ............................................................... -->
+
+    <element elementName="Netware"
+             elementTypePath="root.types.resource.software.operatingSystem"
+             displayLabel="Netware"
+             icon="ico_os_netware.xsl"
+             isTemplate="true">
+             <attribute attributeName="nwSysServerName" dataType="string" displayLabel="NetWare Server Physical Name" />
+             <attribute attributeName="nwSysInternalNetNum" dataType="string" displayLabel="Internal IPX network number" />
+             <attribute attributeName="nwSysOSMajorVer" dataType="number" displayLabel="NetWare OS Major Version" />
+             <attribute attributeName="nwSysOSMinorVer" dataType="number" displayLabel="NetWare OS Minor Version" />
+             <attribute attributeName="logicalStorageInfo" dataType="text" isList="true"  displayLabel="Logical Storage Information" />
+             <attribute attributeName="devicesInfo" dataType="text" isList="true"  displayLabel="Devices Contained by NetWare Server" />
+             <attribute attributeName="NetwareVolumesInfo" dataType="text" isList="true"  displayLabel="NetWare Volumes Information" />
+
+        <attrSysDefValue attributeName="manufacturer">Novell Corporation</attrSysDefValue>
+    </element>
+
+    <!-- ............................................................... -->
+    <!-- .......            Network declarations             ........... -->
+    <!-- ............................................................... -->
+
+    <element elementName="CiscoRouter"
+        elementTypePath="root.types.resource.software.operatingSystem.embedded.networkInfrastructure.router"
+        displayLabel="Cisco Routers"
+        isTemplate="true" >
+        <attrSysDefValue attributeName="manufacturer">Cisco Systems</attrSysDefValue>
+        <attribute attributeName="ciscoNics" dataType="text" displayLabel="A collection stash, similar to the Windows element's systemData attribute."/>
+    </element>
+
+    <element elementName="CiscoSwitch"
+        elementTypePath="root.types.resource.software.operatingSystem.embedded.networkInfrastructure.switch"
+        displayLabel="Cisco Switches"
+        isTemplate="true" >
+        <attrSysDefValue attributeName="manufacturer">Cisco Systems</attrSysDefValue>
+        <attribute attributeName="ciscoNics" dataType="text" displayLabel="A collection stash, similar to the Windows element's systemData attribute."/>
+    </element>
+
+
+    <!-- ............................................................... -->
+    <!-- .......            Hardware declarations            ........... -->
+    <!-- ............................................................... -->
+
+    <element elementName="APCUPS"
+        elementTypePath="root.types.resource.software.operatingSystem.embedded.ups"
+        displayLabel="APC UPS Equipment"
+        isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">APC Technologies</attrSysDefValue>
+    </element>
+
+    <element elementName="AvayaPhone"
+        elementTypePath="root.types.resource.software.operatingSystem.embedded.telephony.handset"
+        displayLabel="Avaya Phone"
+        isTemplate="true">
+        <attribute attributeName="phoneIP" dataType="string"
+                   displayLabel="Phone IP" />
+        <attribute attributeName="callServerIP" dataType="string"
+                   displayLabel="Call Server IP" />
+        <attribute attributeName="supplicant" dataType="string"
+                   displayLabel="Supplicant Status" />
+        <attribute attributeName="router" dataType="string"
+                   displayLabel="Router Addresses" />
+        <attribute attributeName="mask" dataType="string"
+                   displayLabel="Subnet Mask" />
+        <attribute attributeName="tf802_1q" dataType="string"
+                   displayLabel="802.1Q tagging flag" />
+        <attribute attributeName="vlanID" dataType="string"
+                   displayLabel="Administered Telephone VLAN Identifier" />
+        <attribute attributeName="interfacePortSpeed" dataType="string"
+                   displayLabel="Ethernet interface speed" />
+        <attribute attributeName="interfaceDuplexModel" dataType="string"
+                   displayLabel="Ethernet line interface duplex setting" />
+        <attribute attributeName="phoneModel" dataType="string"
+                   displayLabel="Model identifier" />
+        <attribute attributeName="phoneSerialNumber" dataType="string"
+                   displayLabel="Housing serial number" />
+        <attribute attributeName="macAddress" dataType="string"
+                   displayLabel="MAC address" />
+        <attribute attributeName="networkJitterDelay" dataType="string"
+                   displayLabel="Jitter buffer size" />
+        <attrSysDefValue attributeName="manufacturer">Avaya</attrSysDefValue>
+    </element>
+
+    <element elementName="Brocade"
+        elementTypePath="root.types.resource.software.operatingSystem.embedded.storage.SAN.FabricSwitch"
+        displayLabel="Brocade SAN Fabric Switches"
+        isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Brocade Communications</attrSysDefValue>
+    </element>
+
+    <element elementName="Cisco"
+        elementTypePath="root.types.resource.software.operatingSystem.embedded.storage.SAN.FabricSwitch"
+        displayLabel="Cisco SAN Fabric Switches"
+        isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Cisco Systems</attrSysDefValue>
+        <attribute attributeName="numVSANs" dataType="number"
+               displayLabel="Number of VSANs" />
+        <attribute attributeName="VSANInfo"  dataType="text" isList="true"
+               displayLabel="VSAN Information" />
+    </element>
+
+    <element elementName="EMC"
+        elementTypePath="root.types.resource.software.operatingSystem.embedded.storage.SAN.FabricSwitch"
+        displayLabel="EMC SAN Fabric Switches"
+        isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">EMC Corporation</attrSysDefValue>
+    </element>
+
+    <element elementName="HP"
+        elementTypePath="root.types.resource.software.operatingSystem.embedded.storage.SAN.FabricSwitch"
+        displayLabel="HP SAN Fabric Switches"
+        isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Hewlett-Packard Co</attrSysDefValue>
+    </element>
+
+    <element elementName="IBM"
+        elementTypePath="root.types.resource.software.operatingSystem.embedded.storage.SAN.FabricSwitch"
+        displayLabel="IBM SAN Fabric Switches"
+        isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">IBM Corp</attrSysDefValue>
+    </element>
+
+    <element elementName="McDATA"
+        elementTypePath="root.types.resource.software.operatingSystem.embedded.storage.SAN.FabricSwitch"
+        displayLabel="McDATA SAN Fabric Switches"
+        isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">McDATA</attrSysDefValue>
+    </element>
+
+    <element elementName="NetAppFiler"
+        elementTypePath="root.types.resource.software.operatingSystem.embedded.storage.NAS"
+        displayLabel="NetApp Filers"
+        isTemplate="true" >
+        <attrSysDefValue attributeName="manufacturer">Network Appliance</attrSysDefValue>
+    </element>
+
+    <element elementName="SunStorageDevice"
+        elementTypePath="root.types.resource.software.operatingSystem.embedded.storage"
+        displayLabel="Sun Storage Devices"
+        isTemplate="true">
+        <attrSysDefValue attributeName="manufacturer">Sun MicrosystemsSun Microsystems, Inc.</attrSysDefValue>
+    </element>
+
+
+</module>

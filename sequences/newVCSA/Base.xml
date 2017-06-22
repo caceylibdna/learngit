@@ -4038,6 +4038,14 @@
 <expression operator="column" type="string" hasParen="false" isInternal="false" >
 <value><![CDATA[os_agg_nics.operatingSystem_type]]></value></expression>
 <expression operator="classifier" type="string" hasParen="false" isInternal="false" >
+<value><![CDATA[root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA]]></value></expression>
+</expression>
+<expression operator="value" type="string" hasParen="false" isInternal="false" >
+<value><![CDATA[Hypervisors]]></value></expression>
+<expression operator="inClass" type="string" hasParen="false" isInternal="false" >
+<expression operator="column" type="string" hasParen="false" isInternal="false" >
+<value><![CDATA[os_agg_nics.operatingSystem_type]]></value></expression>
+<expression operator="classifier" type="string" hasParen="false" isInternal="false" >
 <value><![CDATA[root.types.resource.software.operatingSystem.MacOS]]></value></expression>
 </expression>
 <expression operator="value" type="string" hasParen="false" isInternal="false" >

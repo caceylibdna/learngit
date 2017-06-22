@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bdna SYSTEM "bdna.dtd">
+
+<!-- ............................................................... -->
+<!-- .......      VMware VCSA  OS fingerprints   ........... -->
+<!-- ............................................................... -->
+
+<module
+    name="com.bdna.modules.os.VMwareVCSA"
+    displayLabel="VMware vCenter Serve Appliance"
+    requiredPlatformVersion="030300"
+    version="1"
+    lastCompatibleVersion="1">
+
+    <moduleDependency parentModuleName="com.bdna.modules.os.OperatingSystemTypes" parentModuleVersion="1.0" />
+
+    <!-- VMwareESXServer fingerprint -->
+    <target type="root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA" />
+
+    <element
+        elementName="VMwareVCSA"
+        elementTypePath="root.types.resource.software.operatingSystem.hypervisor"
+        displayLabel="VMware vCenter Serve Appliance"
+        isTemplate="true" >
+        <attribute attributeName="HostAndGuestData" dataType="text" displayLabel="Data for ESX and their VMs managed by vCenter"/>
+        <attributeSet
+        attributeSetName="HostAndGuestDataVcsa_attributeSet"
+        collectorName="HostAndGuestDataVcsaCollector"
+        maxScriptRunTime="1800000"
+        collectionInterval="-1"
+        displayLabel="VMware vCenterHostAndGuestData attributeSet" >
+        <attributeSetEntry attributeName="HostAndGuestData" />
+        </attributeSet>
+
+        <!-- attributeSet For BDNA-15502: wincs patch For VMware 6.5  -->
+        <attributeSet
+            attributeSetName="HostAndGuestDataVcsa_attributeSet6X"
+            collectorName="HostAndGuestDataVcsaCollector6X"
+            maxScriptRunTime="1800000"
+            collectionInterval="-1"
+            displayLabel="VMware vCenterHostAndGuestData attributeSet 6X" >
+            <attributeSetEntry attributeName="HostAndGuestData" />
+        </attributeSet>
+
+        <attrSysDefValue attributeName="manufacturer">VMware, Inc.</attrSysDefValue>
+
+    </element>
+
+    <package name="VMwareVCSA" displayLabel="VMware vCenter Serve Appliance">
+        <depend name="IPAddresses" />
+        <depend name="operatingSystems"  />
+    </package>
+    
+    <package name="VMwareVCSA6X" displayLabel="VMware vCenter Serve Appliance 6.X">
+        <depend name="IPAddresses" />
+        <depend name="operatingSystems"  />
+    </package>
+
+    <packageRelationship parentPackage="operatingSystems" childPackage="VMwareVCSA" />
+    <packageRelationship parentPackage="operatingSystems" childPackage="VMwareVCSA6X" />
+   
+
+    <packageAttributeSet packageName="VMwareVCSA" attributeSetName="HostAndGuestDataVcsa_attributeSet" />
+    <packageAttributeSet packageName="VMwareVCSA6X" attributeSetName="HostAndGuestDataVcsa_attributeSet6X" />
+
+    <collector
+        collectorName="HostAndGuestDataVcsaCollector"
+        connectionMethodPath="root.types.collection.connectionMethod.vCenterAppliance"
+        collectionScriptName="VMwarevCenterESXHostDataScript">
+        <scriptRef name="VMwarevCenterESXHostDataScript" scriptType="collection" seqNum="1"  />
+   </collector>        
+
+   <!-- BDNA-15502: wincs patch For VMware 6.5  -->
+   <collector
+       collectorName="HostAndGuestDataVcsaCollector6X"
+       connectionMethodPath="root.types.collection.connectionMethod.vCenterAppliance6X"
+       collectionScriptName="VMwarevCenterESXHostDataScript6X">
+       <scriptRef name="VMwarevCenterESXHostDataScript6X" scriptType="collection" seqNum="1"  />
+   </collector>
+
+    <rule
+        name="FindvcsaFromIPOpenPorts"
+        weight="80" >
+        <search variable="ip" pattern="root.types.internetAddress" >
+            <use attribute="openPorts" />
+<!--            <simpleFilterConst attribute="openPorts" operator="contains" constant="135&lt;BDNA,&gt;tcp&lt;BDNA,&gt;msrpc" />   -->
+            <simpleFilterConst attribute="openPorts" operator="contains" constant="443&lt;BDNA,&gt;tcp&lt;BDNA,&gt;https" />
+       </search>
+       <search variable="host" pattern="root.types.resource.host"
+          target="root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA">
+          <use attribute="hostName" />
+          <use attribute="name" />
+       </search>
+       <simpleJoinFilter lhsVariable="ip" operator="parentOf" rhsVariable="host" /> 
+       <output type="root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA" />
+       <output type="root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA" attribute="name" />
+       <output type="root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA" attribute="hostName" />
+       <output type="root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA" attribute="identificationMethod" />
+       <output type="root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA" attribute="identificationConfidence" />
+       <output type="root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA" attribute="originalConfidence" />
+       <output type="root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA" attribute="deviceType" />
+       <output type="root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA" attribute="scanDate" />
+       <output type="root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA" attribute="level1AccessOK" />
+       <output parentType="host" childType="root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA" />
+       <conclusion type="perl">
+       <![CDATA[
+       our (%ip, %host);
+       our $result = "<result>";
+       my $parent = $host{"elementFullName"};
+       my $ports = $ip{"openPorts"};
+       my $eltName = "VMwareVCSA";
+       my $eltFullName = $parent . "." . $eltName;
+
+       $result .=
+           &elementXML($eltName, "root.types.resource.software.operatingSystem.hypervisor.VMwareVCSA", $host{"elementFullName"}) .
+           &dataXML($eltFullName, "name", $host{"name"}) .
+           &dataXML($eltFullName, "hostName", $host{"hostName"}) .
+           &dataXML($eltFullName, "identificationMethod", "Open TCP port pattern") .
+           &dataXML($eltFullName, "identificationConfidence", "80") .
+           &dataXML($eltFullName, "originalConfidence", "80") .
+           &dataXML($eltFullName, "deviceType", "device.system") .
+           &dataXML($eltFullName, "scanDate", &to_bdna_date(scalar(localtime()))) .
+           &dataXML($eltFullName, "level1AccessOK", "1");
+       $result .= "</result>";
+       ]]>
+   </conclusion>
+ </rule>
+
+    <scriptTable
+        scriptName="VMwarevCenterESXHostDataScript"
+        scriptVersion="1.0">
+    </scriptTable>
+
+    <!-- BDNA-15502: wincs patch For VMware 6.5  -->
+    <scriptTable
+        scriptName="VMwarevCenterESXHostDataScript6X"
+        scriptVersion="1.0">
+    </scriptTable>    
+
+<!-- UI VMware vCenter Connection Instance -->
+    <element elementName="vCenterAppliance"
+        parentPath="root.$bdna.uiResourceToCredentialFolder"
+        elementTypePath="root.types.internal.folder.uiResourceToCredentialFolder.uiResourceToCredentialDetails"
+        displayLabel="Instance of Bucketing Details of type root.types.internal.folder.uiResourceToCredentialFolder.uiResourceToCredentialDetails"
+        isTemplate="false" />
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance"
+        attributeName="packageNames"><![CDATA[VMwareVCSA]]></data>
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance"
+        attributeName="taskType"><![CDATA[Inventory]]></data>
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance"
+        attributeName="uiDisplayOrder"><![CDATA[6]]></data>
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance"
+        attributeName="uiResourceDisplayLabel"><![CDATA[VMware vCenter Appliance]]></data>
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance"
+        attributeName="collectionLevel"><![CDATA[2]]></data>
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance"
+        attributeName="connMethodNames"><![CDATA[root.types.collection.connectionMethod.vCenterAppliance]]></data>
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance"
+        attributeName="connMethodDependency"><![CDATA[]]></data>
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance"
+        attributeName="testableConns"><![CDATA[root.types.collection.connectionMethod.vCenterAppliance<BDNA,1>Yes]]></data>
+
+<!-- BDNA-15502: wincs patch For VMware 6.5  -->
+    <element elementName="vCenterAppliance6X"
+       parentPath="root.$bdna.uiResourceToCredentialFolder"
+       elementTypePath="root.types.internal.folder.uiResourceToCredentialFolder.uiResourceToCredentialDetails"
+       displayLabel="Instance of Bucketing Details of type root.types.internal.folder.uiResourceToCredentialFolder.uiResourceToCredentialDetails"
+       isTemplate="false" />
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance6X"
+        attributeName="packageNames"><![CDATA[VMwareVCSA6X]]></data>
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance6X"
+        attributeName="taskType"><![CDATA[Inventory]]></data>
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance6X"
+        attributeName="uiResourceDisplayLabel"><![CDATA[VMware vCenter Appliance (wincsHotfix)]]></data>
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance6X"
+        attributeName="collectionLevel"><![CDATA[2]]></data>
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance6X"
+        attributeName="connMethodNames"><![CDATA[root.types.collection.connectionMethod.vCenterAppliance6X]]></data>
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance6X"
+        attributeName="connMethodDependency"><![CDATA[]]></data>
+
+    <data elementPath="root.$bdna.uiResourceToCredentialFolder.vCenterAppliance6X"
+         attributeName="testableConns"><![CDATA[root.types.collection.connectionMethod.vCenterAppliance6X<BDNA,1>Yes]]></data>
+
+</module>
+

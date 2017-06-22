@@ -4916,6 +4916,7 @@
         <fingerprint moduleName="com.bdna.modules.os.Tru64" />
         <fingerprint moduleName="com.bdna.modules.os.UNIX" />
         <fingerprint moduleName="com.bdna.modules.os.VMwareESXServer" />
+        <fingerprint moduleName="com.bdna.modules.os.VMwareVCSA" />
         <fingerprint moduleName="com.bdna.modules.os.Windows" />
         <fingerprint moduleName="com.bdna.modules.os.XenServer" />
         <fingerprint moduleName="com.bdna.modules.metadata.FullContentFlags" />

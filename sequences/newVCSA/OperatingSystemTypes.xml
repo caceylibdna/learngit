@@ -541,6 +541,20 @@
         <attrSysDefValue attributeName="manufacturer">VMware, Inc.</attrSysDefValue>
 
     </element>
+ 
+    <!-- ............................................................... -->
+    <!-- .......           VMware VCSA declarations           ........... -->
+    <!-- ............................................................... -->
+
+    <element
+        elementName="VMwareVCSA"
+        elementTypePath="root.types.resource.software.operatingSystem.hypervisor"
+        displayLabel="VMware vCenter Serve Appliance"
+        isTemplate="true" >
+        <attribute attributeName="HostAndGuestData" dataType="text" displayLabel="Data for ESX and their VMs managed by vCenter"/>
+        <attrSysDefValue attributeName="manufacturer">VMware, Inc.</attrSysDefValue>
+
+    </element>
 
     <!-- ............................................................... -->
     <!-- .......        Oracle VM Server declarations        ........... -->
